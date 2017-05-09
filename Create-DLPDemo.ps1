@@ -1,5 +1,14 @@
 <#
+  .SYNOPSIS 
+    Sets up DLP Demo
 
+  .DESCRIPTION
+    This script will create new sensitive information type and DLP policy
+    in the Office 365 Security & Compliance Center for the purposes of doing
+    a Demo of DLP features in Office 365.  
+
+  .LINK
+    Online version: http://www.fabrikam.com/extension.html
 #>
 
 ## Connect to S&C Center ##
@@ -25,7 +34,7 @@ try{
 # If the connection fails exit out of the script
 catch{
     Write-host -ForegroundColor red "Unable to connect to the Office 365 Security & Compliance Center"
-    # Exit;
+    Exit;
 }
 
 # Demo sensitive data type XML
@@ -81,7 +90,7 @@ Try{
 }
 catch {
     Write-host -ForegroundColor red "Unable to add data type"
-    # Exit;
+    Exit;
 }
 
 # Create Demo DLP Policy 
