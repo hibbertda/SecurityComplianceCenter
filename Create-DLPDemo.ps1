@@ -8,7 +8,7 @@
     a Demo of DLP features in Office 365.  
 
   .LINK
-    Online version: http://www.fabrikam.com/extension.html
+    Online version: https://github.com/hibbertda/SecurityComplianceCenter
 #>
 
 ## Connect to S&C Center ##
@@ -86,12 +86,10 @@ $DemoDataType_XML.save($XMLExportPath)
 
 # Add DEMO data type to Security & Compliance Center
 Try{
-    New-DlpSensitiveInformationTypeRulePackage -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) -ErrorAction stop
+    New-DlpSensitiveInformationTypeRulePackage -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) `
+      -ErrorAction stop
 }
-catch {
-    Write-host -ForegroundColor red "Unable to add data type"
-    Exit;
-}
+catch {Write-host -ForegroundColor red "Unable to add data type"; Exit}
 
 # Create Demo DLP Policy 
 $PolicyName = "DEMO DLP Policy"
