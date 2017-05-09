@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RulePackage xmlns="http://schemas.microsoft.com/office/2011/mce">
+  <RulePack id="DAD86A92-AB18-43BB-AB35-96F7C594ADAA">
+    <Version major="1" minor="0" build="0" revision="0"/>
+    <Publisher id="619DD8C3-7B80-4998-A312-4DF0402BAC04"/>
+    <Details defaultLangCode="en-us">
+      <LocalizedDetails langcode="en-us">
+        <PublisherName>Hibblabs DLP</PublisherName>
+        <Name>Hibblabs Customer DLP for Demo</Name>
+        <Description>This package is to make DLP demos easier</Description>
+      </LocalizedDetails>
+    </Details>
+  </RulePack>
+  <Rules>
+    <Entity id="df3dc5b2-20e9-48ac-af46-f431d9bdc71c" patternsProximity="300" recommendedConfidence="75">
+      <Pattern confidenceLevel="75">
+        <IdMatch idRef="Regex_DemoID" />
+        <any minmatch="1">
+            <Match idRef="Keyword_findme" />
+        </any>
+      </Pattern>
+    </Entity>
+    <Regex id="Regex_DemoID">(\s)(\d{9})(\s)</Regex>
+    <Keyword id="Keyword_findme">
+      <Group matchStyle="word">
+        <Term>Find Me</Term>
+        <Term>findme</Term>
+      </Group>
+    </Keyword>
+    <LocalizedStrings>
+      <Resource idRef="df3dc5b2-20e9-48ac-af46-f431d9bdc71c">
+        <Name default="true" langcode="en-us">
+          DEMO
+        </Name>
+        <Description default="true" langcode="en-us">
+          A custom classification for doing DLP demos
+        </Description>
+      </Resource>
+    </LocalizedStrings>
+  </Rules>
+</RulePackage>
