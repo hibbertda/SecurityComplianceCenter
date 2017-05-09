@@ -21,6 +21,8 @@ $a = new-object -comobject wscript.shell
 $b = $a.popup("$text",0,"DLP Demo Setup",0+48)	
 
 # Attempt to connect to S&CC
+clear-host
+Write-host -ForegroundColor Yellow "Connecting to Office 365 - Security & Compliance Center`n"
 try{
     $UserCredential = Get-Credential
     $Session = New-PSSession -ConfigurationName Microsoft.Exchange `
@@ -85,44 +87,56 @@ $XMLExportPath = "$ENV:USERPROFILE\Desktop\demodatatype.xml"
 $DemoDataType_XML.save($XMLExportPath)
 
 # Add DEMO data type to Security & Compliance Center
-Try{
-    New-DlpSensitiveInformationTypeRulePackage -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) `
-      -ErrorAction stop
-}
+Clear-Host
+Write-Host -ForegroundColor yellow "Creating custom sensitive data type"
+
+Try{New-DlpSensitiveInformationTypeRulePackage -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) -ErrorAction stop}
 catch {Write-host -ForegroundColor red "Unable to add data type"; Exit}
 
 # Create Demo DLP Policy 
-$PolicyName = "DEMO DLP Policy"
-New-DlpCompliancePolicy -Name $PolicyName `
-    -OneDriveLocation All `
-    -ExchangeLocation All `
-    -SharePointLocation All `
-    -Mode Enable  
+clear-host
+try {
+  $PolicyName = "DEMO DLP Policy"
+  write-host -ForegroundColor yellow "Creating DLP policy: $PolicyName"
+  New-DlpCompliancePolicy -Name $PolicyName `
+      -OneDriveLocation All `
+      -ExchangeLocation All `
+      -SharePointLocation All `
+      -Mode Enable `
+      -ErrorAction stop
 
-# Create 'low' count rule
-New-DlpComplianceRule -Name "Demo - Low" -Policy $PolicyName `
-    -ContentContainsSensitiveInformation @{Name="DEMO"; minCount="1"; maxCount="4"} `
-    -BlockAccess:$False `
-    -NotifyAllowOverride FalsePositive, WithJustification `
-    -NotifyUser SiteAdmin, LastModifier, Owner `
-    -GenerateIncidentReport SiteAdmin `
-    -IncidentReportContent Default `
-    -ReportSeverityLevel Low `
-    -Comment "Demo low count rule"
+  # Create 'low' count rule
+  New-DlpComplianceRule -Name "Demo - Low" -Policy $PolicyName `
+      -ContentContainsSensitiveInformation @{Name="DEMO"; minCount="1"; maxCount="4"} `
+      -BlockAccess:$False `
+      -NotifyAllowOverride FalsePositive, WithJustification `
+      -NotifyUser SiteAdmin, LastModifier, Owner `
+      -GenerateIncidentReport SiteAdmin `
+      -IncidentReportContent Default `
+      -ReportSeverityLevel Low `
+      -Comment "Demo low count rule" `
+      -NotifyPolicyTipCustomText "This DEMO rule (low) will identiy and report on protected content" `
+      -ErrorAction stop
+      
+  # Create 'high' count rule
+  New-DlpComplianceRule -Name "Demo - High" -Policy $PolicyName `
+      -ContentContainsSensitiveInformation @{Name="DEMO"; minCount="5"} `
+      -BlockAccess:$False `
+      -NotifyAllowOverride FalsePositive, WithJustification `
+      -NotifyUser SiteAdmin, LastModifier, Owner `
+      -GenerateIncidentReport SiteAdmin `
+      -IncidentReportContent Default `
+      -ReportSeverityLevel Medium `
+      -Comment "Demo high count rule" `
+      -NotifyPolicyTipCustomText "This DEMO rule (high) will identiy and block access to protected content" `
+      -ErrorAction stop
+}
+Catch {
 
-# Create 'high' count rule
-New-DlpComplianceRule -Name "Demo - High" -Policy $PolicyName `
-    -ContentContainsSensitiveInformation @{Name="DEMO"; minCount="5"} `
-    -BlockAccess:$False `
-    -NotifyAllowOverride FalsePositive, WithJustification `
-    -NotifyUser SiteAdmin, LastModifier, Owner `
-    -GenerateIncidentReport SiteAdmin `
-    -IncidentReportContent Default `
-    -ReportSeverityLevel Medium `
-    -Comment "Demo high count rule"
+  Write-Host -ForegroundColor red "Unable to create DLP policy"; Exit
 
+}
 ## Clean up
-
 Clear-Host
 Write-Host -ForegroundColor green "DLP DEMO Setup Succesful!!!`n"
 Write-Host "Create documents / emails with a string starting with 'Find Me' and 9 random numbers to fire the policy`n"
