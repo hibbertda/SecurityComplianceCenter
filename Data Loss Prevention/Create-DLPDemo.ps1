@@ -90,8 +90,15 @@ $DemoDataType_XML.save($XMLExportPath)
 Clear-Host
 Write-Host -ForegroundColor yellow "Creating custom sensitive data type"
 
-Try{New-DlpSensitiveInformationTypeRulePackage -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) -ErrorAction stop}
-catch {Write-host -ForegroundColor red "Unable to add data type"; Exit}
+Try{
+  New-DlpSensitiveInformationTypeRulePackage `
+  -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) `
+  -ErrorAction stop
+}
+catch {
+  Write-host -ForegroundColor red "Unable to add data type"
+  Exit
+}
 
 # Create Demo DLP Policy 
 clear-host

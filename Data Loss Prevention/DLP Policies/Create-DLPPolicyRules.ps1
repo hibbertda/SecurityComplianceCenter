@@ -1,5 +1,15 @@
 ﻿<#
 
+    .SYNOPSIS 
+    Script to create a general set of DLP policies in the Office 365 
+    Security & Compliance Center. 
+
+    .DESCRIPTION
+    This script will create a set of three DLP policies in the Office 365
+    Security & Compliance Center. A DLP policy will be created for each major 
+    service in Office 365 (Exchange Online, SharePoint Online, OneDrive for Business)
+    
+
 Create Default DLP Policy Rules
 
 TechNet: New-DLPCompliancePolicy
@@ -12,7 +22,9 @@ https://technet.microsoft.com/EN-US/library/mt627834(v=exchg.160).aspx
 #>
 
 Param (
+    # Office 365 tenant name - this will be used to generate policy/rule names
 	[parameter(Position=0, Mandatory=$True)][String]$TenantName,
+    # Comma seperated list of SMTP addresses to receive incident reports
     [parameter(Position=2, Mandatory=$True)][String]$IncidentReportRecipient
 )
 
