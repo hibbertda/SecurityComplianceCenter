@@ -30,7 +30,7 @@ clear-host
 
 $ActiveSessions = Get-PSSession | Where-Object {$_.Availability -eq $true -and $_.ComputerName -like "*compliance.protection.outlook.com"}
 
-#if ($ActiveSessions.count -eq 0){
+if ($ActiveSessions.count -eq 0){
   Write-host -ForegroundColor Yellow "Connecting to Office 365 - Security & Compliance Center`n"
   try{
       $UserCredential = Get-Credential
@@ -47,7 +47,7 @@ $ActiveSessions = Get-PSSession | Where-Object {$_.Availability -eq $true -and $
       Write-host -ForegroundColor red "Unable to connect to the Office 365 Security & Compliance Center"
       Exit
   }
-#}
+}
 #region sensitive_data_type
 # Demo sensitive data type XML
 [XML]$DemoDataType_XML = @"
@@ -103,11 +103,11 @@ Write-Host -ForegroundColor yellow "Creating custom sensitive data type"
 Try{
   New-DlpSensitiveInformationTypeRulePackage `
   -FileData (Get-Content -Path $XMLExportPath -Encoding Byte) `
-  -FileData $DemoDataType_XML `
   -ErrorAction stop
 }
 catch {
   Write-host -ForegroundColor red "Unable to add data type"
+  write-host $_.message
   Exit
 }
 #endregion
@@ -152,6 +152,7 @@ try {
 }
 Catch {
   Write-Host -ForegroundColor red "Unable to create DLP policy"
+  Write-Host $_.Message
   Exit
 }
 #endregion 
@@ -167,5 +168,5 @@ Write-host -ForegroundColor yellow "`tFind Me 123456789`n"
 Remove-Item -Path $XMLExportPath | Out-Null
 
 # Close session
-Get-PSSession $Session | Remove-PSSession
+Get-PSSession | Remove-PSSession
 #endregion

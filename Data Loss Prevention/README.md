@@ -21,7 +21,9 @@ To create DLP run the script. There is no additional parameters required.
 Create-DLPDemo.ps1
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+When the script is completed you will be provided with the DEMO string **Find Me 123456789**.
+[logo]: https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/Script_Done.PNG "The script is done!"
+![alt text][logo]
 
 ## Contributing
 
