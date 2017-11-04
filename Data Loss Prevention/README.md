@@ -21,7 +21,7 @@ To create DLP run the script. There is no additional parameters required.
 Create-DLPDemo.ps1
 ```
 
-When the script is completed you will be provided with the DEMO string **Find Me 123456789**.
+When the script is completed you will be provided with the DEMO string **" Find Me 123456789 "**.
 
 ![alt text](https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/Script_Done.PNG "Script done!")
 
@@ -56,7 +56,7 @@ Rule actions are set to
 
 ## Authors
 
-* **Daniel Hibbert** - *Initial work* - [hibbertda](https://github.com/hibbertda)
+* **Daniel Hibbert** - [hibbertda](https://github.com/hibbertda)
 
 ## License
 
