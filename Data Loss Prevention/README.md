@@ -35,6 +35,8 @@ After the script is compelted check the configuration in the Office 365 [Securit
 
 The new DLP policy will be named **"DEMO DLP Policy"** and the policy will be enabled and turned on.
 
+---
+
 ![alt text](https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/DLP_Policy_Detail.PNG "DLP Policy - Detail")
 
 The policy detail will show three locations that cover all storage locations in Office 365.
@@ -45,6 +47,8 @@ The policy detail will show three locations that cover all storage locations in 
 There will be two policy rules/settings
 * Demo - high
 * Demo - low
+
+---
 
 ![alt text](https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/DLP_Policy_Rules_Detail.PNG "DLP Policy Rules")
 
