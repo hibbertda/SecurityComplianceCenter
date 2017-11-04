@@ -1,6 +1,11 @@
 <#
   .NOTES
+    Daniel A. Hibbert
+    Version 1.2
 
+    [11/3/2017]
+    - Added check for existing PSSession to not exceed max connections to
+      Exchage Online. 
 
   .SYNOPSIS 
     Create data types and policy to demo Office 365 DLP capabilities.
@@ -15,7 +20,7 @@
     Access), only basic authentication is supported. 
 
   .LINK
-    Online version: https://github.com/hibbertda/SecurityComplianceCenter
+  https://github.com/hibbertda/SecurityComplianceCenter/tree/master/Data%20Loss%20Prevention
 #>
 
 # Disclamer on authentication requirements for S&CC
