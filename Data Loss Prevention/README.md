@@ -22,8 +22,8 @@ Create-DLPDemo.ps1
 ```
 
 When the script is completed you will be provided with the DEMO string **Find Me 123456789**.
-[logo]: https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/Script_Done.PNG "The script is done!"
-![alt text][logo]
+
+![alt text](https://github.com/hibbertda/SecurityComplianceCenter/blob/master/Data%20Loss%20Prevention/content/Script_Done.PNG "Script done!")
 
 ## Contributing
 
