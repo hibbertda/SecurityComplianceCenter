@@ -12,6 +12,14 @@ This script will create all of the configuration required to demonstrate and tes
 
 * Assigned **Compliance Administrator** role in the Office 365 Security & Compliance Center. Or appropriate rights to create and manage DLP data types and policies.
 
+* The sensitive data type localization in the script is set to the name of my lab. This information will show for the name and publisher of the data type. There is no issue leaving this as is. If you would like to update the localization information to match your organization modify these lines in the script. 
+---
+    <LocalizedDetails langcode="en-us">
+    <PublisherName>Hibblabs DLP</PublisherName>
+    <Name>Hibblabs Custom DLP for Demo</Name>
+    <Description>This package is to make DLP demos easier</Description>
+    </LocalizedDetails>
+---
 
 ### Installing
 

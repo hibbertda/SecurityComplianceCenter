@@ -23,7 +23,7 @@
     Access), only basic authentication is supported. 
 
   .LINK
-  https://github.com/hibbertda/SecurityComplianceCenter/tree/master/Data%20Loss%20Prevention
+  https://github.com/hibbertda/SecurityComplianceCenter/tree/master/Data%20Loss%20Prevention/Create-DLPDemo
 #>
 
 # Disclamer on authentication requirements for S&CC
